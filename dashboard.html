@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueTribe • Creator Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">TrueTribe</div>
+            <div class="user-menu">
+                <span class="user-name">Creator</span>
+                <div class="user-avatar">C</div>
+            </div>
+        </div>
+        
+        <main class="main-content">
+            <!-- Welcome Message -->
+            <div class="welcome-section">
+                <h2>Welcome back, Creator! 👋</h2>
+                <p>Ready to grow your community with verified humans.</p>
+            </div>
+
+            <!-- Metrics Overview -->
+            <div class="metrics-grid">
+                <div class="metric-card glass-card">
+                    <h3>Total Members</h3>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Verified humans</div>
+                </div>
+                
+                <div class="metric-card glass-card">
+                    <h3>Retention Rate</h3>
+                    <div class="metric-value">-</div>
+                    <div class="metric-label">Industry avg: 62%</div>
+                </div>
+                
+                <div class="metric-card glass-card">
+                    <h3>Campaigns</h3>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Active</div>
+                </div>
+            </div>
+
+            <!-- Replace the empty state section with this: -->
+<div class="campaigns-section">
+    <h3>Active Campaigns</h3>
+    <div class="campaign-card glass-card">
+        <div class="campaign-header">
+            <h4>@yourchannel • Starter Package</h4>
+            <span class="campaign-status live">● Live</span>
+        </div>
+        <div class="campaign-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 25%"></div>
+            </div>
+            <div class="progress-text">25/100 members verified</div>
+        </div>
+        <div class="campaign-metrics">
+            <div class="metric">
+                <span class="metric-value">98%</span>
+                <span class="metric-label">Verification rate</span>
+            </div>
+            <div class="metric">
+                <span class="metric-value">94%</span>
+                <span class="metric-label">Retention (48h)</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load creator data from localStorage
+        const creatorData = JSON.parse(localStorage.getItem('creatorData'));
+        
+        if (creatorData) {
+            // Update UI with real data
+            document.querySelector('.user-name').textContent = creatorData.telegram_username;
+            document.querySelector('.user-avatar').textContent = creatorData.telegram_username.charAt(0).toUpperCase();
+            
+            // Load campaigns from API
+            TrueTribeAPI.getCampaigns(creatorData.id)
+                .then(response => {
+                    if (response.success) {
+                        updateDashboard(response.campaigns);
+                    }
+                })
+                .catch(error => {
+                    console.error('Load campaigns error:', error);
+                });
+        } else {
+            // Redirect to login if no data
+            window.location.href = 'index.html';
+        }
+    });
+
+    function updateDashboard(campaigns) {
+        const campaignsContainer = document.querySelector('.campaigns-section');
+        
+        if (campaigns.length === 0) {
+            // Show empty state
+            campaignsContainer.innerHTML = `
+                <div class="empty-state glass-card">
+                    <div class="empty-icon">🚀</div>
+                    <h3>No campaigns yet</h3>
+                    <p>Launch your first campaign to start growing with verified members</p>
+                    <button class="cta-button" onclick="createCampaign()">
+                        Launch First Campaign
+                    </button>
+                </div>
+            `;
+        } else {
+            // Show active campaigns
+            campaignsContainer.innerHTML = campaigns.map(campaign => `
+                <div class="campaign-card glass-card">
+                    <div class="campaign-header">
+                        <h4>${campaign.channel_name} • ${campaign.package_name}</h4>
+                        <span class="campaign-status ${campaign.status}">● ${campaign.status}</span>
+                    </div>
+                    <div class="campaign-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(campaign.current_members / campaign.package_size) * 100}%"></div>
+                        </div>
+                        <div class="progress-text">${campaign.current_members}/${campaign.package_size} members verified</div>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="metric">
+                            <span class="metric-value">${campaign.verification_rate}%</span>
+                            <span class="metric-label">Verification rate</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">${campaign.retention_rate}%</span>
+                            <span class="metric-label">Retention (48h)</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    function createCampaign() {
+        window.location.href = 'create-campaign.html';
+    }
+</script>
+</body>
+</html>

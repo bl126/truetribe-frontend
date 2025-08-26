@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueTribe • AI-Powered Verification</title>
+    <link rel="stylesheet" href="/truetribe-platform/creator-dashboard/styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <div class="header">
+            <div class="logo">TrueTribe</div>
+        </div>
+        
+        <main class="main-content">
+            <div class="hero-section">
+                <h1 class="gradient-text">Human-Verified Growth,<br>Powered by AI</h1>
+                <p class="subtitle">TrueTribe's authentication system guarantees real humans, not bots, building genuine Web3 communities.</p>
+                
+                <div class="value-props">
+                    <div class="value-item">
+                        <div class="icon">🤖</div> <!-- Changed to robot icon -->
+                        <span>AI-Powered Verification</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="icon">📈</div>
+                        <span>95%+ Retention Rate</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="icon">🔒</div> <!-- Changed to lock icon -->
+                        <span>Bot-Free Communities</span>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="startOnboarding()">
+                    Launch Dashboard →
+                </button>
+            </div>
+        </main>
+    </div>
+
+<script>
+    // Telegram authentication
+    function startOnboarding() {
+        // This would be replaced with actual Telegram Web App initialization
+        const telegramUser = {
+            id: Math.floor(Math.random() * 1000000),
+            username: 'test_creator',
+            first_name: 'Creator'
+        };
+
+        TrueTribeAPI.login(telegramUser)
+            .then(response => {
+                if (response.success) {
+                    // Store user data and redirect to dashboard
+                    localStorage.setItem('creatorData', JSON.stringify(response.user));
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('Login failed: ' + response.error);
+                }
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+                alert('Connection error. Please try again.');
+            });
+    }
+
+    // Load API library
+    document.addEventListener('DOMContentLoaded', function() {
+        const script = document.createElement('script');
+        script.src = '/api.js';
+        document.head.appendChild(script);
+    });
+</script>
+</body>
+</html>

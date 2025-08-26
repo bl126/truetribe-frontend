@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueTribe • Create Campaign</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">TrueTribe</div>
+            <div class="user-menu">
+                <span class="user-name">Creator</span>
+                <div class="user-avatar">C</div>
+            </div>
+        </div>
+        
+        <main class="main-content">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active">1. Choose Package</div>
+                <div class="step">2. Add Channel</div>
+                <div class="step">3. Confirm</div>
+            </div>
+
+            <!-- Package Selection -->
+            <div class="creation-section">
+                <h2>Choose Your Growth Package</h2>
+                <p class="section-subtitle">Only pay for verified, retained members</p>
+                
+                <div class="packages-grid">
+                    <div class="package-card glass-card active">
+                        <h3>Starter</h3>
+                        <div class="package-metric">100 verified members</div>
+                        <div class="package-price">5 TON</div>
+                        <ul class="package-features">
+                            <li>✅ Human verification</li>
+                            <li>✅ 7-day retention check</li>
+                            <li>✅ Basic analytics</li>
+                        </ul>
+                        <button class="package-select-btn">Select Starter</button>
+                    </div>
+                    
+                    <div class="package-card glass-card">
+                        <h3>Growth</h3>
+                        <div class="package-metric">500 verified members</div>
+                        <div class="package-price">20 TON</div>
+                        <ul class="package-features">
+                            <li>✅ Everything in Starter</li>
+                            <li>✅ Priority placement</li>
+                            <li>✅ Advanced analytics</li>
+                        </ul>
+                        <button class="package-select-btn">Select Growth</button>
+                    </div>
+                    
+                    <div class="package-card glass-card">
+                        <h3>Pro</h3>
+                        <div class="package-metric">2000 verified members</div>
+                        <div class="package-price">80 TON</div>
+                        <ul class="package-features">
+                            <li>✅ Everything in Growth</li>
+                            <li>✅ Premium placement</li>
+                            <li>✅ Dedicated support</li>
+                        </ul>
+                        <button class="package-select-btn">Select Pro</button>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn-secondary" onclick="goBack()">← Back</button>
+                    <button class="cta-button" onclick="nextStep()">Continue →</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function goBack() {
+            // Go back to dashboard
+            window.location.href = 'dashboard.html';
+        }
+
+        function nextStep() {
+            // Go to channel setup
+            alert("Proceeding to channel setup...");
+        }
+    </script>
+</body>
+</html>

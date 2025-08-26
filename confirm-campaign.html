@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueTribe • Confirm Campaign</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">TrueTribe</div>
+            <div class="user-menu">
+                <span class="user-name">Creator</span>
+                <div class="user-avatar">C</div>
+            </div>
+        </div>
+        
+        <main class="main-content">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step completed">1. Choose Package</div>
+                <div class="step completed">2. Add Channel</div>
+                <div class="step active">3. Confirm</div>
+            </div>
+
+            <!-- Campaign Summary -->
+            <div class="creation-section">
+                <h2>Review Your Campaign</h2>
+                <p class="section-subtitle">Everything looks good! Confirm to launch</p>
+                
+                <div class="summary-card glass-card">
+                    <div class="summary-item">
+                        <span class="summary-label">Package:</span>
+                        <span class="summary-value">Starter (100 members)</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Channel:</span>
+                        <span class="summary-value">@yourchannel</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Verification:</span>
+                        <span class="summary-value status-verified">✅ Connected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Cost:</span>
+                        <span class="summary-value highlight">5 TON</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">You'll Pay For:</span>
+                        <span class="summary-value">Verified, retained members only</span>
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="badge-icon">🤖</div>
+                        <span>AI-Powered Verification</span>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="badge-icon">🔒</div>
+                        <span>Only Pay for Results</span>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="badge-icon">⚡</div>
+                        <span>Instant Setup</span>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn-secondary" onclick="goBack()">← Back</button>
+                    <button class="cta-button" onclick="launchCampaign()">
+                        🚀 Launch Campaign • 5 TON
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'channel-setup.html';
+        }
+
+        function launchCampaign() {
+            alert("Campaign launched! Redirecting to dashboard...");
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

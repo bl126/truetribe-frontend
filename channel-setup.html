@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueTribe • Channel Setup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">TrueTribe</div>
+            <div class="user-menu">
+                <span class="user-name">Creator</span>
+                <div class="user-avatar">C</div>
+            </div>
+        </div>
+        
+        <main class="main-content">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step completed">1. Choose Package</div>
+                <div class="step active">2. Add Channel</div>
+                <div class="step">3. Confirm</div>
+            </div>
+
+            <!-- Channel Setup -->
+            <div class="creation-section">
+                <h2>Connect Your Telegram Channel</h2>
+                <p class="section-subtitle">We'll verify members without posting to your channel</p>
+                
+                <div class="setup-card glass-card">
+                    <div class="setup-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Make @TrueTribeTrackerBot an admin</h4>
+                            <p>Add our bot as administrator with "View Messages" permission</p>
+                        </div>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Enter your channel username</h4>
+                            <input type="text" placeholder="@yourchannel" class="channel-input">
+                            <small>We never post to your channel - only verify members</small>
+                        </div>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Verify connection</h4>
+                            <button class="verify-btn" onclick="verifyChannel()">
+                                Verify Channel Access
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn-secondary" onclick="goBack()">← Back</button>
+                    <button class="cta-button" onclick="nextStep()">Continue →</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'create-campaign.html';
+        }
+
+        function nextStep() {
+            window.location.href = 'confirm-campaign.html';
+        }
+
+        function verifyChannel() {
+            alert("Verifying channel access...");
+            // Would call your backend API here
+        }
+    </script>
+</body>
+</html>
