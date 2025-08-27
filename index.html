@@ -632,62 +632,48 @@ body {
     </div>
 
 <script>
-    async function startOnboarding() {
-        try {
-            // Simulate Telegram user data (will be real in production)
-            const telegramUser = {
-                id: Math.floor(Math.random() * 1000000),
-                username: 'test_creator',
-                first_name: 'Test Creator'
-            };
+async function startOnboarding() {
+    try {
+        const button = document.querySelector('.cta-button');
+        button.textContent = 'Connecting...';
+        button.disabled = true;
 
-            // Show loading state
-            const button = document.querySelector('.cta-button');
-            button.textContent = 'Connecting...';
-            button.disabled = true;
+        // Create test user data (EXACTLY what the backend expects)
+        const userData = {
+            telegram_id: 999888777,  // ← MUST include telegram_id (not just id)
+            telegram_username: 'test_creator_' + Date.now()
+        };
 
-            // Send to YOUR LIVE BACKEND
-            const response = await fetch('https://truetribe-backend.onrender.com/api/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(telegramUser)
-            });
+        console.log('Sending:', userData);
 
-            const data = await response.json();
+        const response = await fetch('https://truetribe-backend.onrender.com/api/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)  // ← Send the correct data format
+        });
 
-            if (data.success) {
-                // Store user data and redirect to dashboard
-                localStorage.setItem('creatorData', JSON.stringify(data.user));
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Error: ' + data.error);
-                button.textContent = 'Launch Dashboard →';
-                button.disabled = false;
-            }
+        const data = await response.json();
+        console.log('Response:', data);
 
-        } catch (error) {
-            console.error('Connection error:', error);
-            alert('Cannot connect to server. Please try again.');
-            const button = document.querySelector('.cta-button');
+        if (data.success) {
+            localStorage.setItem('creatorData', JSON.stringify(data.user));
+            window.location.href = 'dashboard.html';
+        } else {
+            alert('Error: ' + data.error);
             button.textContent = 'Launch Dashboard →';
             button.disabled = false;
         }
-    }
 
-    // Test backend connection on load
-    async function testConnection() {
-        try {
-            const response = await fetch('https://truetribe-backend.onrender.com/api/');
-            console.log('Backend connection:', response.ok);
-        } catch (error) {
-            console.error('Backend offline:', error);
-        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Connection error: ' + error.message);
+        const button = document.querySelector('.cta-button');
+        button.textContent = 'Launch Dashboard →';
+        button.disabled = false;
     }
-    
-    // Test connection when page loads
-    document.addEventListener('DOMContentLoaded', testConnection);
+}
 </script>
 </body>
 </html>
